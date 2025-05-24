@@ -1,0 +1,54 @@
+trigger:
+- main
+
+pool:
+  name: MahlzeitExpress
+  demands:
+    - agent.os -equals Windows_NT
+
+variables:
+  version: 0.0.5
+
+steps:
+
+- task: PowerShell@2
+  displayName: Install Modules
+  name: installmodules
+  inputs:
+    pwsh: true
+    targetType: filePath
+    filePath: $(Build.SourcesDirectory)/Install-Requirements.ps1
+
+- task: PowerShell@2
+  displayName: Build Module
+  name: modulebuilder
+  inputs:
+    pwsh: true
+    targetType: filePath
+    filePath: $(Build.SourcesDirectory)/Start-ModuleBuild.ps1
+    arguments: -version $(version)
+
+- task: PowerShell@2
+  displayName: Build Nuget
+  name: buildnuget
+  inputs:
+    pwsh: true
+    targetType: filePath
+    filePath: $(Build.SourcesDirectory)/Start-NugetBuild.ps1
+    arguments: -version $(version)
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact
+  name: publishartifact
+  inputs:
+    ArtifactName: module
+    PathtoPublish: $(Build.SourcesDirectory)/Output
+
+- task: NuGetCommand@2
+  displayName: Publish to Nuget
+  name: publishnuget
+  inputs:
+    command: push
+    packagesToPush: $(Build.SourcesDirectory)/Output/Nuget/*.nupkg
+    publishVstsFeed: MahlzeitExpress/PowerShell
+  

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>MahlzeitModul</id>
+        <version>0.0.1</version>
+        <authors>Philip Lorenz</authors>
+        <projectUrl>https://personal.philiplorenz.com</projectUrl>
+        <license type="expression">MIT</license>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <releaseNotes>Bug fixes and performance improvements</releaseNotes>
+        <description>Dummy PowerShell module</description>
+        <copyright>Copyright ©2025 Philip Lorenz</copyright>
+    </metadata>
+</package>
