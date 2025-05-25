@@ -1,0 +1,32 @@
+trigger: none
+
+resources:
+  webhooks:
+    - webhook: HeiseTest
+      connection: WebhookTest
+
+pool:
+  name: MahlzeitExpress
+
+stages:
+- stage: WebHookApproval
+  displayName: Webhook Approval
+  jobs:
+  - job: Approval
+    pool: server
+    steps:
+      - task: ManualValidation@0
+        displayName: Validates trigger
+        timeoutInMinutes: 15
+        inputs:
+          notifyUsers: "contact@philiplorenz.com"
+          instructions: 'Pls validate!'
+
+- stage: ShowGreeting
+  displayName: ShowGreeting
+  jobs:
+  - job: ShowGreeting
+    steps:
+      - bash: |
+          echo "Hallo ${{ parameters.HeiseTest.resource.message.name }}"
+          echo "Viel Erfolg beim Lernen von  ${{ parameters.HeiseTest.resource.message.kursname }}"
