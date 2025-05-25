@@ -1,0 +1,6 @@
+export AZDO_PERSONAL_ACCESS_TOKEN=3cMIEGi9gxszh94U833cYa4BlbGAIrwfza16fcwUkGUJdCSl2utNJQQJ99BEACAAAAA97PBoAAASAZDO3An9
+export AZDO_ORG_SERVICE_URL=https://dev.azure.com/heiseacademy-azuredevops
+
+terraform init
+terraform plan
+terraform apply

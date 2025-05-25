@@ -1,0 +1,1 @@
+https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs
